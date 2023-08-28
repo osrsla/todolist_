@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  todolist_
-//
-//  Created by SR on 2023/08/10.
-//
-
 import UIKit
 import CoreData
 

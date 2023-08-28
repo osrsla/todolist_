@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  todolist_
-//
-//  Created by SR on 2023/08/10.
-//
-
 import UIKit
 
 class ViewController: UIViewController {
@@ -38,7 +31,6 @@ class ViewController: UIViewController {
             if let field = alert.textFields?.first {
                 if let text = field.text, !text.isEmpty {
                     DispatchQueue.main.async {
-                        
                         var currentItems = UserDefaults.standard.stringArray(forKey: "items") ?? []
                         currentItems.append(text)
                         UserDefaults.standard.setValue(currentItems, forKey: "items")
