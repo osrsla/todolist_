@@ -11,7 +11,7 @@ import UIKit
 class TaskViewController: UIViewController {
     let tableView = UITableView()
 
-    let tasks = ["work1", "work2", "work3", "work4"]
+    let tasks = [["work1", "work2", "work3", "work4"], ["fun1", "fun2"], ["study1", "study2", "study3"]]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,13 +50,24 @@ extension TaskViewController: UITableViewDelegate {
 extension TaskViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TaskCell.reuseID, for: indexPath) as! TaskCell
+
+        cell.nameLabel.text = tasks[indexPath.section][indexPath.row]
         return cell
-//        let cell = UITableViewCell()
-//        cell.textLabel?.text = tasks[indexPath.row]
-//        return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tasks[section].count
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
         return tasks.count
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 24
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        "title"
     }
 }
