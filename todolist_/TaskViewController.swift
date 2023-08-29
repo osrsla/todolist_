@@ -10,14 +10,13 @@ import UIKit
 
 class TaskViewController: UIViewController {
     let tableView = UITableView()
-//    let headerView = UIView(frame: CGRect(origin: <#T##CGPoint#>, size: <#T##CGSize#>))
 
     let tasks = ["work1", "work2", "work3", "work4"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setup() // 설정
-        setupLayout() // 오토레이아웃
+        setupHeaderView() // 오토레이아웃
     }
 }
 
@@ -29,7 +28,15 @@ extension TaskViewController {
         view = tableView
     }
 
-    private func setupLayout() {}
+    private func setupHeaderView() {
+        let header = TaskHeaderView()
+
+        var size = header.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        size.width = UIScreen.main.bounds.width
+        header.frame.size = size
+
+        tableView.tableHeaderView = header
+    }
 }
 
 extension TaskViewController: UITableViewDelegate {
