@@ -17,6 +17,8 @@
 		30CDE0E32A9DEC32000E706D /* CatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CDE0E22A9DEC32000E706D /* CatViewController.swift */; };
 		30CDE0E72A9DF407000E706D /* TaskHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CDE0E62A9DF407000E706D /* TaskHeaderView.swift */; };
 		30CDE0E92A9DF80B000E706D /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CDE0E82A9DF80B000E706D /* TaskCell.swift */; };
+		30CDE0EB2A9E0B40000E706D /* Tasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CDE0EA2A9E0B40000E706D /* Tasks.swift */; };
+		30CDE0ED2A9E0D6F000E706D /* DoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CDE0EC2A9E0D6F000E706D /* DoneViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		30CDE0E22A9DEC32000E706D /* CatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatViewController.swift; sourceTree = "<group>"; };
 		30CDE0E62A9DF407000E706D /* TaskHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskHeaderView.swift; sourceTree = "<group>"; };
 		30CDE0E82A9DF80B000E706D /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
+		30CDE0EA2A9E0B40000E706D /* Tasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tasks.swift; sourceTree = "<group>"; };
+		30CDE0EC2A9E0D6F000E706D /* DoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,7 @@
 		30CDE0D62A9D2B22000E706D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				30CDE0EA2A9E0B40000E706D /* Tasks.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -107,6 +112,7 @@
 				30CDE0DE2A9DEBBC000E706D /* TaskViewController.swift */,
 				30CDE0E02A9DEC0D000E706D /* DetailViewController.swift */,
 				30CDE0E22A9DEC32000E706D /* CatViewController.swift */,
+				30CDE0EC2A9E0D6F000E706D /* DoneViewController.swift */,
 			);
 			name = ViewContorollers;
 			sourceTree = "<group>";
@@ -201,7 +207,9 @@
 				30CDE0E72A9DF407000E706D /* TaskHeaderView.swift in Sources */,
 				30CDE0DF2A9DEBBC000E706D /* TaskViewController.swift in Sources */,
 				30CDE0E32A9DEC32000E706D /* CatViewController.swift in Sources */,
+				30CDE0EB2A9E0B40000E706D /* Tasks.swift in Sources */,
 				30CDE0E92A9DF80B000E706D /* TaskCell.swift in Sources */,
+				30CDE0ED2A9E0D6F000E706D /* DoneViewController.swift in Sources */,
 				30CDE0E12A9DEC0D000E706D /* DetailViewController.swift in Sources */,
 				3057C1222A850FBE00348BA2 /* AppDelegate.swift in Sources */,
 				3057C12C2A850FBE00348BA2 /* todolist_.xcdatamodeld in Sources */,

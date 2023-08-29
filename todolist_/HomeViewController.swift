@@ -1,62 +1,89 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-    private let table: UITableView = {
-        let table = UITableView()
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-
-        return table
-    }()
-
-    var items = [String]()
+    let imageView = UIImageView()
+    let taskViewButton = UIButton()
+    let doneViewButton = UIButton()
+    let catViewButton = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        items = UserDefaults.standard.stringArray(forKey: "items") ?? []
-        title = "To Do List"
-        view.addSubview(table)
-        table.dataSource = self
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
-                                                            target: self,
-                                                            action: #selector(didTapAdd))
-    }
-
-    @objc private func didTapAdd() {
-        let alert = UIAlertController(title: "New Item", message: "Enter New to do list item!", preferredStyle: .alert)
-        alert.addTextField { field in
-            field.placeholder = "Enter item..."
-        }
-        alert.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "done", style: .default, handler: { [weak self] _ in
-            if let field = alert.textFields?.first {
-                if let text = field.text, !text.isEmpty {
-                    DispatchQueue.main.async {
-                        var currentItems = UserDefaults.standard.stringArray(forKey: "items") ?? []
-                        currentItems.append(text)
-                        UserDefaults.standard.setValue(currentItems, forKey: "items")
-                        self?.items.append(text)
-                        self?.table.reloadData()
-                    }
-                }
-            }
-        }))
-        present(alert, animated: true)
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        table.frame = view.bounds
+        setup()
+        setupLayout()
     }
 }
 
-extension HomeViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+extension HomeViewController {
+    private func setup() {
+        view.addSubview(imageView)
+        view.addSubview(taskViewButton)
+        view.addSubview(doneViewButton)
+        view.addSubview(catViewButton)
+
+        imageView.image = UIImage(systemName: "heart")
+        imageView.contentMode = .scaleAspectFit
+
+        taskViewButton.setTitle("Task", for: .normal)
+        taskViewButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+        taskViewButton.backgroundColor = UIColor.systemIndigo
+        taskViewButton.setTitleColor(UIColor.white, for: .normal)
+        taskViewButton.layer.cornerRadius = 8
+        taskViewButton.addTarget(self, action: #selector(taskButtonTapped), for: .touchUpInside)
+
+        doneViewButton.setTitle("Done", for: .normal)
+        doneViewButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+        doneViewButton.backgroundColor = UIColor.systemIndigo
+        doneViewButton.setTitleColor(UIColor.white, for: .normal)
+        doneViewButton.layer.cornerRadius = 8
+        doneViewButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
+
+        catViewButton.setTitle("Cat", for: .normal)
+        catViewButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+        catViewButton.backgroundColor = UIColor.systemIndigo
+        catViewButton.setTitleColor(UIColor.white, for: .normal)
+        catViewButton.layer.cornerRadius = 8
+        catViewButton.addTarget(self, action: #selector(catButtonTapped), for: .touchUpInside)
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = items[indexPath.row]
-        return cell
+    private func setupLayout() {
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        taskViewButton.translatesAutoresizingMaskIntoConstraints = false
+        doneViewButton.translatesAutoresizingMaskIntoConstraints = false
+        catViewButton.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 10),
+            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: 200),
+            imageView.heightAnchor.constraint(equalToConstant: 200),
+
+            taskViewButton.topAnchor.constraint(equalToSystemSpacingBelow: imageView.bottomAnchor, multiplier: 5),
+            taskViewButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            taskViewButton.widthAnchor.constraint(equalToConstant: 100),
+            taskViewButton.heightAnchor.constraint(equalToConstant: 36),
+
+            doneViewButton.topAnchor.constraint(equalToSystemSpacingBelow: taskViewButton.bottomAnchor, multiplier: 3),
+            doneViewButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            doneViewButton.widthAnchor.constraint(equalToConstant: 100),
+            doneViewButton.heightAnchor.constraint(equalToConstant: 36),
+
+            catViewButton.topAnchor.constraint(equalToSystemSpacingBelow: doneViewButton.bottomAnchor, multiplier: 3),
+            catViewButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            catViewButton.widthAnchor.constraint(equalToConstant: 100),
+            catViewButton.heightAnchor.constraint(equalToConstant: 36),
+
+        ])
+    }
+
+    @objc private func taskButtonTapped() {
+        navigationController?.pushViewController(TaskViewController(), animated: true)
+    }
+
+    @objc private func doneButtonTapped() {
+        navigationController?.pushViewController(DoneViewController(), animated: false)
+    }
+
+    @objc private func catButtonTapped() {
+        navigationController?.pushViewController(CatViewController(), animated: false)
     }
 }
