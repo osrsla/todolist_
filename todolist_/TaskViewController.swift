@@ -25,6 +25,10 @@ extension TaskViewController {
         tableView.delegate = self
         tableView.dataSource = self
 
+        tableView.register(TaskCell.self, forCellReuseIdentifier: TaskCell.reuseID)
+        tableView.rowHeight = TaskCell.rowHeight
+        tableView.tableFooterView = UIView()
+
         view = tableView
     }
 
@@ -45,9 +49,11 @@ extension TaskViewController: UITableViewDelegate {
 
 extension TaskViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = tasks[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: TaskCell.reuseID, for: indexPath) as! TaskCell
         return cell
+//        let cell = UITableViewCell()
+//        cell.textLabel?.text = tasks[indexPath.row]
+//        return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

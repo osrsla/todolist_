@@ -16,6 +16,7 @@
 		30CDE0E12A9DEC0D000E706D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CDE0E02A9DEC0D000E706D /* DetailViewController.swift */; };
 		30CDE0E32A9DEC32000E706D /* CatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CDE0E22A9DEC32000E706D /* CatViewController.swift */; };
 		30CDE0E72A9DF407000E706D /* TaskHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CDE0E62A9DF407000E706D /* TaskHeaderView.swift */; };
+		30CDE0E92A9DF80B000E706D /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CDE0E82A9DF80B000E706D /* TaskCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		30CDE0E02A9DEC0D000E706D /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		30CDE0E22A9DEC32000E706D /* CatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatViewController.swift; sourceTree = "<group>"; };
 		30CDE0E62A9DF407000E706D /* TaskHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskHeaderView.swift; sourceTree = "<group>"; };
+		30CDE0E82A9DF80B000E706D /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 		30CDE0E52A9DF3D5000E706D /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				30CDE0E82A9DF80B000E706D /* TaskCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 				30CDE0E72A9DF407000E706D /* TaskHeaderView.swift in Sources */,
 				30CDE0DF2A9DEBBC000E706D /* TaskViewController.swift in Sources */,
 				30CDE0E32A9DEC32000E706D /* CatViewController.swift in Sources */,
+				30CDE0E92A9DF80B000E706D /* TaskCell.swift in Sources */,
 				30CDE0E12A9DEC0D000E706D /* DetailViewController.swift in Sources */,
 				3057C1222A850FBE00348BA2 /* AppDelegate.swift in Sources */,
 				3057C12C2A850FBE00348BA2 /* todolist_.xcdatamodeld in Sources */,
