@@ -13,7 +13,12 @@ class DoneViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
         setupTableView()
+    }
+
+    private func setup() {
+        navigationItem.title = "Done Task"
     }
 
     private func setupTableView() {
@@ -39,8 +44,7 @@ extension DoneViewController: UITableViewDataSource {
         let completedTasks = TaskList.completeList()
         let task = completedTasks[indexPath.row]
 
-        cell.titleLabel.text = task.title
-        cell.squareButton.setImage(UIImage(systemName: "circle.fill"), for: .normal)
+        cell.task = task
 
         return cell
     }

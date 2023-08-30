@@ -12,7 +12,6 @@ class DetailViewController: UIViewController {
     var task: Task?
     let categoryLabel = UILabel()
     let titleLabel = UILabel()
-    let squareButton = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +24,8 @@ class DetailViewController: UIViewController {
             return
         }
 
+        navigationItem.title = "Task Detail"
+
         categoryLabel.text = task.category.rawValue
         categoryLabel.font = UIFont.preferredFont(forTextStyle: .title2)
         categoryLabel.textColor = .systemGray
@@ -35,21 +36,27 @@ class DetailViewController: UIViewController {
         titleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
         titleLabel.textAlignment = .center
         titleLabel.adjustsFontForContentSizeCategory = true
+        titleLabel.numberOfLines = 0
+        titleLabel.backgroundColor = .systemGray6
 
         view.addSubview(categoryLabel)
         view.addSubview(titleLabel)
+
         categoryLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        categoryLabel.bottomAnchor.constraint(equalToSystemSpacingBelow: titleLabel.topAnchor, multiplier: -1).isActive = true
-        categoryLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        categoryLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7).isActive = true
-        categoryLabel.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        NSLayoutConstraint.activate([
+            categoryLabel.bottomAnchor.constraint(equalToSystemSpacingBelow: titleLabel.topAnchor, multiplier: -1),
+            categoryLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            categoryLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            categoryLabel.heightAnchor.constraint(equalToConstant: 70),
 
-        titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        titleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7).isActive = true
-        titleLabel.heightAnchor.constraint(equalToConstant: 100).isActive = true
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            titleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            titleLabel.heightAnchor.constraint(equalToConstant: 70),
+
+        ])
 
         let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonTapped))
         let deleteButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteButtonTapped))
@@ -62,7 +69,6 @@ class DetailViewController: UIViewController {
 
     @objc private func editButtonTapped() {
         let editVC = EditViewController()
-//        editVC.task = task
         navigationController?.pushViewController(editVC, animated: true)
     }
 

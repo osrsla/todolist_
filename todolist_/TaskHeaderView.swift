@@ -26,7 +26,7 @@ class TaskHeaderView: UIView {
     private func setup() {
         addSubview(contentView)
       
-        contentView.backgroundColor = .systemBackground
+        contentView.backgroundColor = .systemBlue
        
         contentView.translatesAutoresizingMaskIntoConstraints = false
       
@@ -35,7 +35,6 @@ class TaskHeaderView: UIView {
             contentView.rightAnchor.constraint(equalTo: rightAnchor),
             contentView.bottomAnchor.constraint(equalTo: bottomAnchor),
             contentView.leftAnchor.constraint(equalTo: leftAnchor),
-            
         ])
     }
 }

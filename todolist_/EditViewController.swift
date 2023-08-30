@@ -23,6 +23,10 @@ class EditViewController: UIViewController {
 
 extension EditViewController {
     private func setup() {
+        
+        navigationItem.title = "Edit"
+        
+        
         taskLable.text = "task"
         taskLable.font = UIFont.systemFont(ofSize: 16)
         taskLable.textAlignment = .center

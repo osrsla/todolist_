@@ -16,7 +16,6 @@ class TaskViewController: UIViewController {
         view.backgroundColor = .systemBackground
         setup()
         setupHeaderView()
-        setupNavigationBar()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -27,6 +26,14 @@ class TaskViewController: UIViewController {
 
 extension TaskViewController {
     private func setup() {
+        navigationItem.title = "Task List"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "Add",
+            style: .plain,
+            target: self,
+            action: #selector(addButtonTapped)
+        )
+
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -42,15 +49,6 @@ extension TaskViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-    }
-
-    private func setupNavigationBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "Add",
-            style: .plain,
-            target: self,
-            action: #selector(addButtonTapped)
-        )
     }
 
     private func setupHeaderView() {
@@ -112,6 +110,8 @@ extension TaskViewController: UITableViewDataSource {
         let tasksForCategory = TaskList.filterByCategory(category: category)
         let task = tasksForCategory[indexPath.row]
 
+        cell.delegate = self
+
         cell.textLabel?.text = task.title
         return cell
     }
@@ -141,5 +141,18 @@ extension TaskViewController: UITableViewDataSource {
         guard let category = TaskCategory.categorv(from: section) else { return nil }
         let titelHeader = category.rawValue
         return TaskList.filterByCategory(category: category).isEmpty ? nil : titelHeader
+    }
+}
+
+extension TaskViewController: TaskCellDelegate {
+    func taskCell(_ cell: TaskCell, didToggleCompletionFor task: Task, newCompletedValue: Bool) {
+        var updatedTask = task
+        updatedTask.isCompleted = newCompletedValue
+
+        TaskList.completeTask(task: updatedTask, isCompleted: newCompletedValue)
+
+        if let indexPath = tableView.indexPath(for: cell) {
+            tableView.reloadRows(at: [indexPath], with: .none)
+        }
     }
 }

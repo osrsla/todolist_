@@ -8,25 +8,31 @@
 import Foundation
 import UIKit
 
+protocol TaskCellDelegate: AnyObject {
+    func taskCell(_ cell: TaskCell, didToggleCompletionFor task: Task, newCompletedValue: Bool)
+}
+
 class TaskCell: UITableViewCell {
+    weak var delegate: TaskCellDelegate?
+
     let titleLabel = UILabel()
-    let squareButton = UIButton()
-    
+    let completionSwitch = UISwitch()
+
     var task: Task? {
         didSet {
             updateUI()
         }
     }
-    
+
     static let reuseID = "Cell"
     static let rowHeight: CGFloat = 100
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
         layout()
     }
-    
+
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -35,56 +41,44 @@ class TaskCell: UITableViewCell {
 
 extension TaskCell {
     private func setup() {
+        completionSwitch.addTarget(self, action: #selector(completionSwitchValueChanged), for: .valueChanged)
         contentView.addSubview(titleLabel)
-        contentView.addSubview(squareButton)
-        
+        contentView.addSubview(completionSwitch)
+
         titleLabel.font = UIFont.preferredFont(forTextStyle: .body)
         titleLabel.adjustsFontForContentSizeCategory = true
         titleLabel.text = task?.title
-        
-        squareButton.setImage(UIImage(systemName: "square"), for: .normal)
-        squareButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        squareButton.backgroundColor = .systemBackground
-        squareButton.addTarget(self, action: #selector(squareButtonTapped), for: .primaryActionTriggered)
+
+        completionSwitch.addTarget(self, action: #selector(completionSwitchValueChanged), for: .valueChanged)
     }
-    
+
     private func layout() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        squareButton.translatesAutoresizingMaskIntoConstraints = false
-        
+        completionSwitch.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1),
             titleLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
             titleLabel.widthAnchor.constraint(equalToConstant: 200),
-            
-            squareButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            squareButton.trailingAnchor.constraint(equalToSystemSpacingAfter: trailingAnchor, multiplier: -10),
-            squareButton.widthAnchor.constraint(equalToConstant: 48),
-            squareButton.heightAnchor.constraint(equalToConstant: 48)
+
+            completionSwitch.centerYAnchor.constraint(equalTo: centerYAnchor),
+            completionSwitch.trailingAnchor.constraint(equalToSystemSpacingAfter: trailingAnchor, multiplier: -20),
+            completionSwitch.widthAnchor.constraint(equalToConstant: 48),
+            completionSwitch.heightAnchor.constraint(equalToConstant: 48)
 
         ])
     }
 
     private func updateUI() {
         titleLabel.text = task?.title
-         
-        if task?.isCompleted == true {
-            squareButton.setImage(UIImage(systemName: "square.fill"), for: .normal)
-        } else {
-            squareButton.setImage(UIImage(systemName: "square"), for: .normal)
-        }
+        completionSwitch.isOn = task?.isCompleted ?? false
     }
-    
-    @objc private func squareButtonTapped(_ sender: Any) {
-        guard var task = task else { return }
-        
-        let newCompletedValue = !task.isCompleted
-        task.isCompleted = newCompletedValue
-        
-        TaskList.completeTask(task: task, isCompleted: newCompletedValue)
-        
-        updateUI()
-        
-        NotificationCenter.default.post(name: Notification.Name("TaskCompletedStatusChanged"), object: nil)
+
+    @objc private func completionSwitchValueChanged(_ sender: UISwitch) {
+        guard let task = task else { return }
+
+        let newCompletedValue = sender.isOn
+
+        delegate?.taskCell(self, didToggleCompletionFor: task, newCompletedValue: newCompletedValue)
     }
 }

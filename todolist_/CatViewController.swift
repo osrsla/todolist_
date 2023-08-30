@@ -20,6 +20,8 @@ class CatViewController: UIViewController {
 
 extension CatViewController {
     private func setup() {
+        navigationItem.title = "🐈🐈‍⬛ Cat 🐈‍⬛🐈"
+        
         view.addSubview(imageView)
         
         imageView.image = UIImage(systemName: "photo")

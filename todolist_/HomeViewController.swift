@@ -26,6 +26,8 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController {
     private func setup() {
+        navigationItem.title = "Home"
+
         view.addSubview(imageView)
         view.addSubview(taskViewButton)
         view.addSubview(doneViewButton)
