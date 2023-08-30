@@ -9,12 +9,11 @@ import Foundation
 import UIKit
 
 class TaskCell: UITableViewCell {
-    let nameLabel = UILabel()
-    let dateLabel = UILabel()
+    let titleLabel = UILabel()
+   
+    let circleButton = UIButton()
     
-    let personImageView = UIImageView()
-    
-    static let reuseID = "AccountSummaryCell"
+    static let reuseID = "Cell"
     static let rowHeight: CGFloat = 100
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -31,42 +30,42 @@ class TaskCell: UITableViewCell {
 
 extension TaskCell {
     private func setup() {
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(dateLabel)
-        contentView.addSubview(personImageView)
+        contentView.addSubview(titleLabel)
+    
+        contentView.addSubview(circleButton)
         
-        nameLabel.font = UIFont.preferredFont(forTextStyle: .body)
-        nameLabel.adjustsFontForContentSizeCategory = true
-        nameLabel.text = "Task Name"
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        titleLabel.adjustsFontForContentSizeCategory = true
+        titleLabel.text = "Task Name"
         
-        dateLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
-        dateLabel.textColor = .systemGray
-        dateLabel.adjustsFontForContentSizeCategory = true
-        dateLabel.text = "Date(Time)"
-        
-        personImageView.image = UIImage(systemName: "person")
-        personImageView.contentMode = .scaleAspectFit
+        circleButton.setImage(UIImage(systemName: "circle"), for: .normal)
+        circleButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+        circleButton.setTitleColor(UIColor.systemIndigo, for: .normal)
+        circleButton.backgroundColor = .systemBackground
+        circleButton.addTarget(self, action: #selector(circleButtonTapped), for: .touchUpInside)
     }
     
     private func layout() {
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        personImageView.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+      
+        circleButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1),
-            nameLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
-            nameLabel.widthAnchor.constraint(equalToConstant: 200),
+            titleLabel.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1),
+            titleLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
+            titleLabel.widthAnchor.constraint(equalToConstant: 200),
             
-            dateLabel.topAnchor.constraint(equalToSystemSpacingBelow: nameLabel.bottomAnchor, multiplier: 1),
-            dateLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
-            dateLabel.widthAnchor.constraint(equalToConstant: 200),
-            
-            personImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            personImageView.trailingAnchor.constraint(equalToSystemSpacingAfter: trailingAnchor, multiplier: -1),
-            personImageView.widthAnchor.constraint(equalToConstant: 24),
-            personImageView.heightAnchor.constraint(equalToConstant: 24)
+            circleButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            circleButton.trailingAnchor.constraint(equalToSystemSpacingAfter: trailingAnchor, multiplier: -1),
+            circleButton.widthAnchor.constraint(equalToConstant: 24),
+            circleButton.heightAnchor.constraint(equalToConstant: 24)
 
         ])
+    }
+    
+    @objc private func circleButtonTapped() {
+        print("Circle button tapped")
+        circleButton.setImage(UIImage(systemName: "circle.fill"), for: .normal)
+       
     }
 }

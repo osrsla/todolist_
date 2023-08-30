@@ -7,8 +7,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let homeVC = HomeViewController()
     let taskVC = TaskViewController()
-//    let DetailVC = DetailViewController()
-//    let CatVC = CatViewController()
+    let detailVC = DetailViewController()
+    let catVC = CatViewController()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)

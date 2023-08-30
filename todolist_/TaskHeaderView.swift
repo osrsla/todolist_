@@ -20,16 +20,16 @@ class TaskHeaderView: UIView {
     }
     
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: UIView.noIntrinsicMetric, height: 24)
-    } // 높이 필수!
+        return CGSize(width: UIView.noIntrinsicMetric, height: 36)
+    }
     
     private func setup() {
         addSubview(contentView)
-     
-        contentView.backgroundColor = .systemGray4
+      
+        contentView.backgroundColor = .systemBackground
        
         contentView.translatesAutoresizingMaskIntoConstraints = false
-
+      
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: topAnchor),
             contentView.rightAnchor.constraint(equalTo: rightAnchor),
