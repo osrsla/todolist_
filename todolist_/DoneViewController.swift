@@ -40,7 +40,7 @@ extension DoneViewController: UITableViewDataSource {
         let task = completedTasks[indexPath.row]
 
         cell.titleLabel.text = task.title
-        cell.circleButton.setImage(UIImage(systemName: "circle.fill"), for: .normal)
+        cell.squareButton.setImage(UIImage(systemName: "circle.fill"), for: .normal)
 
         return cell
     }

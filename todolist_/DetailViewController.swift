@@ -12,6 +12,7 @@ class DetailViewController: UIViewController {
     var task: Task?
     let categoryLabel = UILabel()
     let titleLabel = UILabel()
+    let squareButton = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,77 +54,26 @@ class DetailViewController: UIViewController {
         let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonTapped))
         let deleteButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteButtonTapped))
 
+        editButton.tintColor = .systemBlue
+        deleteButton.tintColor = .systemBlue
+
         navigationItem.rightBarButtonItems = [deleteButton, editButton]
     }
 
     @objc private func editButtonTapped() {
-        let actionSheet = UIViewController()
-        actionSheet.view.backgroundColor = .systemBackground
-
-        let titleLabel = UILabel()
-        titleLabel.text = "Edit Task"
-        titleLabel.font = .boldSystemFont(ofSize: 17)
-        titleLabel.textAlignment = .center
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        actionSheet.view.addSubview(titleLabel)
-
-        let textField = UITextField()
-        textField.placeholder = "Edit Task Title"
-        textField.text = task?.title
-        textField.adjustsFontForContentSizeCategory = true
-        textField.borderStyle = .roundedRect
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        actionSheet.view.addSubview(textField)
-
-        let categoryPicker = UIPickerView()
-        categoryPicker.dataSource = self
-        categoryPicker.delegate = self
-        categoryPicker.translatesAutoresizingMaskIntoConstraints = false
-        actionSheet.view.addSubview(categoryPicker)
-
-        let saveButton = UIButton(type: .system)
-        saveButton.setTitle("Save", for: .normal)
-        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
-        saveButton.translatesAutoresizingMaskIntoConstraints = false
-        actionSheet.view.addSubview(saveButton)
-
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: actionSheet.view.topAnchor, constant: 20),
-            titleLabel.leadingAnchor.constraint(equalTo: actionSheet.view.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: actionSheet.view.trailingAnchor, constant: -20),
-
-            textField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            textField.leadingAnchor.constraint(equalTo: actionSheet.view.leadingAnchor, constant: 20),
-            textField.trailingAnchor.constraint(equalTo: actionSheet.view.trailingAnchor, constant: -20),
-            textField.heightAnchor.constraint(equalToConstant: 40),
-
-            categoryPicker.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 20),
-            categoryPicker.leadingAnchor.constraint(equalTo: actionSheet.view.leadingAnchor),
-            categoryPicker.trailingAnchor.constraint(equalTo: actionSheet.view.trailingAnchor),
-            categoryPicker.heightAnchor.constraint(equalToConstant: 200),
-
-            saveButton.topAnchor.constraint(equalTo: categoryPicker.bottomAnchor, constant: 20),
-            saveButton.centerXAnchor.constraint(equalTo: actionSheet.view.centerXAnchor),
-            saveButton.bottomAnchor.constraint(equalTo: actionSheet.view.bottomAnchor, constant: -20)
-        ])
-
-        actionSheet.preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.5)
-
-        present(actionSheet, animated: true, completion: nil)
-    }
-
-    @objc private func saveButtonTapped() {
-      
+        let editVC = EditViewController()
+        editVC.task = task
+        navigationController?.pushViewController(editVC, animated: true)
     }
 
     @objc private func deleteButtonTapped() {
         let alertController = UIAlertController(title: "Delete Task", message: "Are you sure you want to delete this task?", preferredStyle: .alert)
 
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
-
-            // (TaskList.removeTask 함수 구현 필요)
-
-            self?.navigationController?.popViewController(animated: true)
+            if let taskToDelete = self?.task {
+                TaskList.deleteTask(task: taskToDelete)
+                self?.navigationController?.popViewController(animated: true)
+            }
         }
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)

@@ -36,21 +36,21 @@ extension HomeViewController {
 
         taskViewButton.setTitle("Task", for: .normal)
         taskViewButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        taskViewButton.backgroundColor = UIColor.systemIndigo
+        taskViewButton.backgroundColor = UIColor.systemBlue
         taskViewButton.setTitleColor(UIColor.white, for: .normal)
         taskViewButton.layer.cornerRadius = 8
         taskViewButton.addTarget(self, action: #selector(taskButtonTapped), for: .touchUpInside)
 
         doneViewButton.setTitle("Done", for: .normal)
         doneViewButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        doneViewButton.backgroundColor = UIColor.systemIndigo
+        doneViewButton.backgroundColor = UIColor.systemBlue
         doneViewButton.setTitleColor(UIColor.white, for: .normal)
         doneViewButton.layer.cornerRadius = 8
         doneViewButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
 
         catViewButton.setTitle("Cat", for: .normal)
         catViewButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        catViewButton.backgroundColor = UIColor.systemIndigo
+        catViewButton.backgroundColor = UIColor.systemBlue
         catViewButton.setTitleColor(UIColor.white, for: .normal)
         catViewButton.layer.cornerRadius = 8
         catViewButton.addTarget(self, action: #selector(catButtonTapped), for: .touchUpInside)

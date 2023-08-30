@@ -18,6 +18,11 @@ class TaskViewController: UIViewController {
         setupHeaderView()
         setupNavigationBar()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
 }
 
 extension TaskViewController {
@@ -59,9 +64,9 @@ extension TaskViewController {
     }
 
     @objc private func addButtonTapped() {
-        let alertController = UIAlertController(title: "New Task", message: nil, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "New Task🏃‍♀️🏃‍♂️💨", message: nil, preferredStyle: .alert)
         alertController.addTextField { textField in
-            textField.placeholder = "Add New Task"
+            textField.placeholder = "Add New Task!"
         }
 
         let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in

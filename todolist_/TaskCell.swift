@@ -10,9 +10,13 @@ import UIKit
 
 class TaskCell: UITableViewCell {
     let titleLabel = UILabel()
-    let circleButton = UIButton()
+    let squareButton = UIButton()
     
-    var task: Task?
+    var task: Task? {
+        didSet {
+            updateUI()
+        }
+    }
     
     static let reuseID = "Cell"
     static let rowHeight: CGFloat = 100
@@ -32,48 +36,55 @@ class TaskCell: UITableViewCell {
 extension TaskCell {
     private func setup() {
         contentView.addSubview(titleLabel)
-    
-        contentView.addSubview(circleButton)
+        contentView.addSubview(squareButton)
         
         titleLabel.font = UIFont.preferredFont(forTextStyle: .body)
         titleLabel.adjustsFontForContentSizeCategory = true
-        titleLabel.text = "Task Name"
+        titleLabel.text = task?.title
         
-        circleButton.setImage(UIImage(systemName: "circle"), for: .normal)
-        circleButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        circleButton.setTitleColor(UIColor.systemIndigo, for: .normal)
-        circleButton.backgroundColor = .systemBackground
-        circleButton.addTarget(self, action: #selector(circleButtonTapped), for: .touchUpInside)
+        squareButton.setImage(UIImage(systemName: "square"), for: .normal)
+        squareButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+        squareButton.backgroundColor = .systemBackground
+        squareButton.addTarget(self, action: #selector(squareButtonTapped), for: .primaryActionTriggered)
     }
     
     private func layout() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-      
-        circleButton.translatesAutoresizingMaskIntoConstraints = false
+        squareButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1),
             titleLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
             titleLabel.widthAnchor.constraint(equalToConstant: 200),
             
-            circleButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            circleButton.trailingAnchor.constraint(equalToSystemSpacingAfter: trailingAnchor, multiplier: -1),
-            circleButton.widthAnchor.constraint(equalToConstant: 24),
-            circleButton.heightAnchor.constraint(equalToConstant: 24)
+            squareButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            squareButton.trailingAnchor.constraint(equalToSystemSpacingAfter: trailingAnchor, multiplier: -10),
+            squareButton.widthAnchor.constraint(equalToConstant: 48),
+            squareButton.heightAnchor.constraint(equalToConstant: 48)
 
         ])
     }
-    
-    @objc private func circleButtonTapped() {
-        guard let task = task else { return }
-        let newCompletedValue = !task.isCompleted
-          
-        TaskList.completeTask(task: task, isCompleted: newCompletedValue)
-                  
-        if newCompletedValue {
-            circleButton.setImage(UIImage(systemName: "circle.fill"), for: .normal)
+
+    private func updateUI() {
+        titleLabel.text = task?.title
+         
+        if task?.isCompleted == true {
+            squareButton.setImage(UIImage(systemName: "square.fill"), for: .normal)
         } else {
-            circleButton.setImage(UIImage(systemName: "circle"), for: .normal)
+            squareButton.setImage(UIImage(systemName: "square"), for: .normal)
         }
+    }
+    
+    @objc private func squareButtonTapped(_ sender: Any) {
+        guard var task = task else { return }
+        
+        let newCompletedValue = !task.isCompleted
+        task.isCompleted = newCompletedValue
+        
+        TaskList.completeTask(task: task, isCompleted: newCompletedValue)
+        
+        updateUI()
+        
+        NotificationCenter.default.post(name: Notification.Name("TaskCompletedStatusChanged"), object: nil)
     }
 }
