@@ -10,8 +10,9 @@ import UIKit
 
 class TaskCell: UITableViewCell {
     let titleLabel = UILabel()
-   
     let circleButton = UIButton()
+    
+    var task: Task?
     
     static let reuseID = "Cell"
     static let rowHeight: CGFloat = 100
@@ -64,8 +65,15 @@ extension TaskCell {
     }
     
     @objc private func circleButtonTapped() {
-        print("Circle button tapped")
-        circleButton.setImage(UIImage(systemName: "circle.fill"), for: .normal)
-       
+        guard let task = task else { return }
+        let newCompletedValue = !task.isCompleted
+          
+        TaskList.completeTask(task: task, isCompleted: newCompletedValue)
+                  
+        if newCompletedValue {
+            circleButton.setImage(UIImage(systemName: "circle.fill"), for: .normal)
+        } else {
+            circleButton.setImage(UIImage(systemName: "circle"), for: .normal)
+        }
     }
 }

@@ -10,6 +10,17 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         setup()
         setupLayout()
+
+        imageView.getImageFromURL(url: "https://spartacodingclub.kr/css/images/scc-og.jpg") { result in
+            switch result {
+            case .success(let data):
+                DispatchQueue.main.async {
+                    self.imageView.image = UIImage(data: data)
+                }
+            case .failure(let error):
+                print("Error loading image: \(error)")
+            }
+        }
     }
 }
 
@@ -20,7 +31,7 @@ extension HomeViewController {
         view.addSubview(doneViewButton)
         view.addSubview(catViewButton)
 
-        imageView.image = UIImage(systemName: "heart")
+        imageView.image = UIImage(systemName: "photo")
         imageView.contentMode = .scaleAspectFit
 
         taskViewButton.setTitle("Task", for: .normal)
