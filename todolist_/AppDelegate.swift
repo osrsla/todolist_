@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         window?.backgroundColor = .systemBackground
 
-        let navigationController = UINavigationController(rootViewController: homeVC)
+        let navigationController = UINavigationController(rootViewController: editVC)
         window?.rootViewController = navigationController
 
         return true

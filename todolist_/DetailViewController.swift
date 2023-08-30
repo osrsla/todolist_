@@ -62,7 +62,7 @@ class DetailViewController: UIViewController {
 
     @objc private func editButtonTapped() {
         let editVC = EditViewController()
-        editVC.task = task
+//        editVC.task = task
         navigationController?.pushViewController(editVC, animated: true)
     }
 
@@ -82,21 +82,5 @@ class DetailViewController: UIViewController {
         alertController.addAction(cancelAction)
 
         present(alertController, animated: true, completion: nil)
-    }
-}
-
-extension DetailViewController: UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return TaskCategory.allCases.count
-    }
-}
-
-extension DetailViewController: UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return TaskCategory.allCases[row].rawValue
     }
 }
