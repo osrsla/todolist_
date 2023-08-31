@@ -10,6 +10,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let taskVC = TaskViewController()
     let detailVC = DetailViewController()
     let editVC = EditViewController()
+    let createVC = CreateViewController()
 
     let catVC = CatViewController()
 

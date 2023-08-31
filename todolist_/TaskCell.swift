@@ -8,15 +8,9 @@
 import Foundation
 import UIKit
 
-protocol TaskCellDelegate: AnyObject {
-    func taskCell(_ cell: TaskCell, didToggleCompletionFor task: Task, newCompletedValue: Bool)
-}
-
 class TaskCell: UITableViewCell {
-    weak var delegate: TaskCellDelegate?
-
     let titleLabel = UILabel()
-    let completionSwitch = UISwitch()
+    var completionSwitch = UISwitch()
 
     var task: Task? {
         didSet {
@@ -30,7 +24,7 @@ class TaskCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
-        layout()
+        setupLayout()
     }
 
     @available(*, unavailable)
@@ -41,18 +35,18 @@ class TaskCell: UITableViewCell {
 
 extension TaskCell {
     private func setup() {
-        completionSwitch.addTarget(self, action: #selector(completionSwitchValueChanged), for: .valueChanged)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(completionSwitch)
-
         titleLabel.font = UIFont.preferredFont(forTextStyle: .body)
         titleLabel.adjustsFontForContentSizeCategory = true
         titleLabel.text = task?.title
 
+        completionSwitch.isOn = false
         completionSwitch.addTarget(self, action: #selector(completionSwitchValueChanged), for: .valueChanged)
     }
 
-    private func layout() {
+    private func setupLayout() {
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(completionSwitch)
+
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         completionSwitch.translatesAutoresizingMaskIntoConstraints = false
 
@@ -62,7 +56,7 @@ extension TaskCell {
             titleLabel.widthAnchor.constraint(equalToConstant: 200),
 
             completionSwitch.centerYAnchor.constraint(equalTo: centerYAnchor),
-            completionSwitch.trailingAnchor.constraint(equalToSystemSpacingAfter: trailingAnchor, multiplier: -20),
+            completionSwitch.trailingAnchor.constraint(equalToSystemSpacingAfter: trailingAnchor, multiplier: -5),
             completionSwitch.widthAnchor.constraint(equalToConstant: 48),
             completionSwitch.heightAnchor.constraint(equalToConstant: 48)
 
@@ -76,9 +70,11 @@ extension TaskCell {
 
     @objc private func completionSwitchValueChanged(_ sender: UISwitch) {
         guard let task = task else { return }
+        if sender.isOn {
+            TaskList.completeTask(task: task, isCompleted: true)
 
-        let newCompletedValue = sender.isOn
-
-        delegate?.taskCell(self, didToggleCompletionFor: task, newCompletedValue: newCompletedValue)
+        } else {
+            TaskList.completeTask(task: task, isCompleted: false)
+        }
     }
 }
