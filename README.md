@@ -9,27 +9,28 @@
 ## 프로젝트 구조 - MVC 아키텍처
 
 MyTodoListApp
-│ AppDelegate.swift
-│
-└───Utils
-│ │ NetworkError.swift
-│ │ UIImageView+Extension.swift
-│
-└───Models
-│ │ Task.swift
-│ │ TaskList.swift
-│
-└───Views
-│ │ TaskCell.swift
-│ │ TaskHeaderView.swift
-│
-└───ViewControllers
-│ HomeViewController.swift
-│ TaskViewController.swift
-│ DetailViewController.swift
-│ EditViewController.swift
-│ DoneViewController.swift
-│ CatViewController.swift
+|
+|-- AppDelegate.swift
+|
+|-- Utils
+|   |-- NetworkError.swift
+|   |-- UIImageView+Extension.swift
+|
+|-- Models
+|   |-- Task.swift
+|   |-- TaskList.swift
+|
+|-- Views
+|   |-- TaskCell.swift
+|   |-- TaskHeaderView.swift
+|
+|-- ViewControllers
+|   |-- HomeViewController.swift
+|   |-- TaskViewController.swift
+|   |-- DetailViewController.swift
+|   |-- EditViewController.swift
+|   |-- DoneViewController.swift
+|   |-- CatViewController.swift
 
 
 ### AppDelegate.swift
