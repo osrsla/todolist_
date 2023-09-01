@@ -1,47 +1,25 @@
 # NBC My Todo List App - Random Cat version
 
-할일(Task)를 추가하고 관리하는 간단한 앱에 랜덤으로 고양이🐈 사진을 불러오는 페이지를 추가하였습니다.
-유저디포트를 이용해 추가한 할일을 저장하고, UrlSession을 이용해 이미지 파일을 불러왔습니다.
+- 할일(Task)을 추가하고 관리하는 간단한 앱에 랜덤으로 고양이🐈 사진을 불러오는 페이지를 추가하였습니다.
+- UserDefaults를 이용해 추가한 할일을 저장하고, UrlSession을 이용해 이미지 파일을 불러왔습니다.
 
 
 
 
 ## 프로젝트 구조 - MVC 아키텍처
 
-MyTodoListApp
-|
-|-- AppDelegate.swift
-|
-|-- Utils
-|   |-- NetworkError.swift
-|   |-- UIImageView+Extension.swift
-|
-|-- Models
-|   |-- Task.swift
-|   |-- TaskList.swift
-|
-|-- Views
-|   |-- TaskCell.swift
-|   |-- TaskHeaderView.swift
-|
-|-- ViewControllers
-|   |-- HomeViewController.swift
-|   |-- TaskViewController.swift
-|   |-- DetailViewController.swift
-|   |-- EditViewController.swift
-|   |-- DoneViewController.swift
-|   |-- CatViewController.swift
-
+<img width="566" alt="Screenshot 2023-09-01 at 12 53 18 PM" src="https://github.com/osrsla/todolist_/assets/139095139/63d76ac6-995b-4cef-aca0-dbabc84fd9d0">
 
 ### AppDelegate.swift
 
-앱의 라이프사이클을 처리하고 주 창을 초기화
+- 앱의 라이프사이클을 처리하고 주 창을 초기화
 
 ### Utils
 
 앱 전체에서 공통 기능을 제공하는 유틸리티 파일: 
--`NetworkError.swift`: 사용자 정의 네트워크 오류 유형을 정의
--`UIImageView+Extension.swift`: `UIImageView`를 확장하여 이미지 로딩 및 캐싱을 위한 메서드 추가
+
+- `NetworkError.swift`: 사용자 정의 네트워크 오류 유형을 정의
+- `UIImageView+Extension.swift`: `UIImageView`를 확장하여 이미지 로딩 및 캐싱을 위한 메서드 추가
 
 ### Models
 
@@ -73,7 +51,7 @@ MyTodoListApp
 
 ## 뷰 컨트롤러 Life Cycle
 
-각 뷰 컨트롤러의 생명주기 메서드 데이터를 불러오고 관리
+각 뷰 컨트롤러의 생명주기 메서드로 데이터를 불러오고 관리
 
 - viewDidLoad
 
