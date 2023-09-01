@@ -3,6 +3,7 @@
 - 할일(Task)을 추가하고 관리하는 간단한 앱에 랜덤으로 고양이🐈 사진을 불러오는 페이지를 추가하였습니다.
 - UserDefaults를 이용해 추가한 할일을 저장하고, UrlSession을 이용해 이미지 파일을 불러왔습니다.
 
+<img width="1440" alt="Screenshot 2023-09-01 at 1 01 23 PM" src="https://github.com/osrsla/todolist_/assets/139095139/9c4e4713-e393-4290-8f5e-de797234e532">
 
 
 
