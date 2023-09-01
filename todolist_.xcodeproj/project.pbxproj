@@ -23,7 +23,6 @@
 		30CDE0F52A9EBD08000E706D /* UIImageView + Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CDE0F42A9EBD08000E706D /* UIImageView + Extention.swift */; };
 		30CDE0F72A9EBEED000E706D /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CDE0F62A9EBEED000E706D /* TaskList.swift */; };
 		30CDE0F92A9F3545000E706D /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CDE0F82A9F3545000E706D /* EditViewController.swift */; };
-		30CDE0FB2AA06DB3000E706D /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CDE0FA2AA06DB3000E706D /* CreateViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +44,6 @@
 		30CDE0F42A9EBD08000E706D /* UIImageView + Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extention.swift"; sourceTree = "<group>"; };
 		30CDE0F62A9EBEED000E706D /* TaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
 		30CDE0F82A9F3545000E706D /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
-		30CDE0FA2AA06DB3000E706D /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +80,7 @@
 				3057C1212A850FBE00348BA2 /* AppDelegate.swift */,
 				30CDE0D52A9D2B11000E706D /* Utils */,
 				30CDE0D62A9D2B22000E706D /* Models */,
+				30CDE0E42A9DF3AF000E706D /* Views */,
 				30CDE0D72A9D2B3F000E706D /* ViewContorollers */,
 			);
 			path = todolist_;
@@ -119,15 +118,12 @@
 		30CDE0D72A9D2B3F000E706D /* ViewContorollers */ = {
 			isa = PBXGroup;
 			children = (
-				30CDE0E52A9DF3D5000E706D /* Cells */,
-				30CDE0E42A9DF3AF000E706D /* Views */,
 				3057C1252A850FBE00348BA2 /* HomeViewController.swift */,
 				30CDE0DE2A9DEBBC000E706D /* TaskViewController.swift */,
 				30CDE0E02A9DEC0D000E706D /* DetailViewController.swift */,
 				30CDE0F82A9F3545000E706D /* EditViewController.swift */,
 				30CDE0EC2A9E0D6F000E706D /* DoneViewController.swift */,
 				30CDE0E22A9DEC32000E706D /* CatViewController.swift */,
-				30CDE0FA2AA06DB3000E706D /* CreateViewController.swift */,
 			);
 			name = ViewContorollers;
 			sourceTree = "<group>";
@@ -135,6 +131,7 @@
 		30CDE0E42A9DF3AF000E706D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				30CDE0E52A9DF3D5000E706D /* Cells */,
 				30CDE0E62A9DF407000E706D /* TaskHeaderView.swift */,
 			);
 			name = Views;
@@ -223,7 +220,6 @@
 				30CDE0DF2A9DEBBC000E706D /* TaskViewController.swift in Sources */,
 				30CDE0E32A9DEC32000E706D /* CatViewController.swift in Sources */,
 				30CDE0EB2A9E0B40000E706D /* Task.swift in Sources */,
-				30CDE0FB2AA06DB3000E706D /* CreateViewController.swift in Sources */,
 				30CDE0F92A9F3545000E706D /* EditViewController.swift in Sources */,
 				30CDE0E92A9DF80B000E706D /* TaskCell.swift in Sources */,
 				30CDE0F72A9EBEED000E706D /* TaskList.swift in Sources */,
