@@ -5,8 +5,6 @@
 - 앱 아이콘 및 런치스크린을 추가하였습니다.
 - MVC 모델을 기반으로 모듈을 관리하고 뷰컨트롤러의 라이프사이클을 고려했습니다.
 
-  
-
 <img width="1440" alt="Screenshot 2023-09-01 at 1 01 23 PM" src="https://github.com/osrsla/todolist_/assets/139095139/9c4e4713-e393-4290-8f5e-de797234e532">
 
 
@@ -50,6 +48,7 @@
 - `EditViewController.swift`: 작업 세부 정보를 편집하고 업데이트
 - `DoneViewController.swift`: tableView로 완료된 작업 나열
 - `CatViewController.swift`: 랜덤 고양이 사진 표시
+
 
 ## 애니메이션
 ![todo_animation](https://github.com/osrsla/todolist_/assets/139095139/932088ae-3a07-4ca0-9054-ae352ee3c93f)
