@@ -55,10 +55,11 @@ extension TaskCell {
             titleLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
             titleLabel.widthAnchor.constraint(equalToConstant: 200),
 
-            completionSwitch.centerYAnchor.constraint(equalTo: centerYAnchor),
-            completionSwitch.trailingAnchor.constraint(equalToSystemSpacingAfter: trailingAnchor, multiplier: -5),
-            completionSwitch.widthAnchor.constraint(equalToConstant: 48),
-            completionSwitch.heightAnchor.constraint(equalToConstant: 48)
+            completionSwitch.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1),
+            completionSwitch.leadingAnchor.constraint(equalToSystemSpacingAfter: titleLabel.trailingAnchor, multiplier: 15),
+
+            completionSwitch.widthAnchor.constraint(equalToConstant: 24),
+            completionSwitch.heightAnchor.constraint(equalToConstant: 24)
 
         ])
     }

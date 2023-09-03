@@ -2,9 +2,15 @@ import UIKit
 
 class HomeViewController: UIViewController {
     let imageView = UIImageView()
+    var appTitleLabel = UILabel()
     let taskViewButton = UIButton()
     let doneViewButton = UIButton()
     let catViewButton = UIButton()
+
+    // animation
+    var leadingEdgeOnScreen: CGFloat = 16
+    var leadingEdgeOffScreen: CGFloat = -1000
+    var appTitleLeadingAnchor: NSLayoutConstraint?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +28,11 @@ class HomeViewController: UIViewController {
             }
         }
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        animate()
+    }
 }
 
 extension HomeViewController {
@@ -29,12 +40,18 @@ extension HomeViewController {
         navigationItem.title = "Home"
 
         view.addSubview(imageView)
+        view.addSubview(appTitleLabel)
         view.addSubview(taskViewButton)
         view.addSubview(doneViewButton)
         view.addSubview(catViewButton)
 
         imageView.image = UIImage(systemName: "photo")
         imageView.contentMode = .scaleAspectFit
+
+        appTitleLabel.text = "MEMO🐈Cat"
+        appTitleLabel.textAlignment = .center
+        appTitleLabel.adjustsFontForContentSizeCategory = true
+        appTitleLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
 
         taskViewButton.setTitle("Task", for: .normal)
         taskViewButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
@@ -60,6 +77,7 @@ extension HomeViewController {
 
     private func setupLayout() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        appTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         taskViewButton.translatesAutoresizingMaskIntoConstraints = false
         doneViewButton.translatesAutoresizingMaskIntoConstraints = false
         catViewButton.translatesAutoresizingMaskIntoConstraints = false
@@ -68,9 +86,12 @@ extension HomeViewController {
             imageView.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 10),
             imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             imageView.widthAnchor.constraint(equalToConstant: 200),
-            imageView.heightAnchor.constraint(equalToConstant: 200),
+            imageView.heightAnchor.constraint(equalToConstant: 150),
 
-            taskViewButton.topAnchor.constraint(equalToSystemSpacingBelow: imageView.bottomAnchor, multiplier: 5),
+            appTitleLabel.topAnchor.constraint(equalToSystemSpacingBelow: imageView.bottomAnchor, multiplier: 2),
+            appTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+
+            taskViewButton.topAnchor.constraint(equalToSystemSpacingBelow: appTitleLabel.bottomAnchor, multiplier: 3),
             taskViewButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             taskViewButton.widthAnchor.constraint(equalToConstant: 100),
             taskViewButton.heightAnchor.constraint(equalToConstant: 36),
@@ -84,8 +105,10 @@ extension HomeViewController {
             catViewButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             catViewButton.widthAnchor.constraint(equalToConstant: 100),
             catViewButton.heightAnchor.constraint(equalToConstant: 36),
-
         ])
+
+        appTitleLeadingAnchor = appTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leadingEdgeOffScreen)
+        appTitleLeadingAnchor?.isActive = true
     }
 
     @objc private func taskButtonTapped() {
@@ -98,5 +121,15 @@ extension HomeViewController {
 
     @objc private func catButtonTapped() {
         navigationController?.pushViewController(CatViewController(), animated: false)
+    }
+}
+
+extension HomeViewController {
+    private func animate() {
+        let animator1 = UIViewPropertyAnimator(duration: 1, curve: .easeInOut) {
+            self.appTitleLeadingAnchor?.constant = self.leadingEdgeOnScreen
+            self.view.layoutIfNeeded()
+        }
+        animator1.startAnimation()
     }
 }
